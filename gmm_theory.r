@@ -49,8 +49,8 @@ set.seed(123)
 # Reproducible
 
 # Generate the data from normal distribution
-n <- 200
-x <- rnorm(n, mean = 4, sd = 2)
+n <- 10000
+x <- rnorm(n, mean = 1, sd = 0.001)
 # set up the moment conditions for comparison
 # MM (just identified)
 g0 <- function(tet, x) {
@@ -63,18 +63,18 @@ g0 <- function(tet, x) {
 
 # Test codes from Git-hub
 
-gmmOpt2 <- gamelevel %>%
+Test_gmmOpt <- gamelevel %>%
   gmm(utility ~ ticket + drug_se + drug_tweet_daily + drug_news,
       x = ~ ticket + ticket_lag + drug_se + drug_tweet_daily + drug_news,
       data = ., wmatrix = "optimal")
 
-summary(gmmOpt2)
+summary(Test_gmmOpt)
 
 
 
 # main 2stage gmm data(10000 iteration)
 
-gmmOpt1 <- gamelevel %>% 
+Main_gmmOpt <- gamelevel %>% 
   gmm(utility ~ ticket + drug_se + drug_tweet_daily + drug_news +
       star + win + compete + rank + stadiumage +
       pos_t1 + dv_t1 + lg_t1 + ws_t1 +
@@ -112,7 +112,7 @@ gmmOpt1 <- gamelevel %>%
       control = list(eval.max = 10000)
       )
 
-summary(gmmOpt1)
+summary(Main_gmmOpt)
 
 
 # Simulate One column data
@@ -121,8 +121,8 @@ set.seed(123)
 # Reproducible
 
 # Generate the data from normal distribution
-n <- 200
-x <- rnorm(n, mean = 4, sd = 2)
+n <- 10000
+x <- rnorm(n, mean = 1, sd = 0.001)
 # set up the moment conditions for comparison
 # MM (just identified)
 g0 <- function(tet, x) {
